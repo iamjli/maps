@@ -18,11 +18,13 @@ $(function() {
         }
     ];
 
+    var map;
+
     var models = {
 
         init: function() {
             // create map
-            this.map = new google.maps.Map(document.getElementById('map'), {
+            map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 12,
                 center: initLatLng
             });
@@ -48,6 +50,15 @@ $(function() {
         // adds location to list
         addLocs: function(loc) {
             this.list.append('<li>'+loc.name+'</li>')
+        },
+
+        responsive: function() {
+            google.maps.event.addDomListener(window, 'load', models.init());
+            google.maps.event.addDomListener(window, "resize", function() {
+                var center = map.getCenter();
+                google.maps.event.trigger(map, "resize");
+                map.setCenter(center);
+            });
         }
 
     };
@@ -59,6 +70,6 @@ $(function() {
 
     };
 
-    models.init();
-
+    // models.init();
+    models.responsive();
 });

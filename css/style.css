@@ -1,6 +1,14 @@
+html, body {
+  height: 100%;
+}
+
 body {
 	font-family: 'Lato', sans-serif;
 	font-weight: 300;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
 hr {
@@ -15,6 +23,11 @@ img {
     height: auto;
 }
 
+.container {
+    width: 100%;
+    margin: 0;
+}
+
 .text-muted {
 	color: #BCBBBB;
 }
@@ -22,7 +35,7 @@ img {
 .text-thin {
 	font-weight: 100;
 }
- 
+
 .title-super {
 	font-size: 60px;
 }
@@ -45,4 +58,27 @@ img {
 	margin: 10px;
 	max-height: 420px;
 	overflow: auto;
+}
+
+#map-container{
+    height: 900px;
+    max-width: 100%;
+}
+
+#map {
+	height: 100%
+}
+
+.locs {
+    position: absolute;
+    height: 100%;
+    margin-top: 50px;
+    margin-left: 9px;
+    background: black;
+    float: left;
+    z-index: 1;
+}
+
+.input-group {
+	width: 100%;
 }
