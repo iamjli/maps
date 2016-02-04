@@ -17,10 +17,15 @@
     <div class="container">
       <div class="row">
         <div class="col-md-2">
+          <locs data-bind="forEach: locations">
+            <ul id="locs">
+              <ol data-bind="text: name"></ol>
+            </ul>
+          </locs>
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search for..." id="search">
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button" id="button">Filter</button>
+              <button class="btn btn-default" type="button" id="button" data-bind="click: filter">Filter</button>
             </span>
           </div>
           <ul id="locs"></ul>

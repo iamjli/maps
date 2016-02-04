@@ -8,4 +8,5 @@ $(function () {
 
     // kick things off by creating the `App`
     app.AppView.init();
+    // app.models.init();
 });

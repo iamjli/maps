@@ -20,12 +20,12 @@ var app = app || {};
             app.AppView.displayLocs(LOCATIONS);
 
             // on click, trigger filter
-            $('#button').click(function() {
-                var search = $('#search').val();
-                var results = models.filter(search);
+            // $('#button').click(function() {
+            //     var search = $('#search').val();
+            //     var results = app.models.filter(search);
 
-                app.AppView.displayLocs(results);
-            });
+            //     // app.AppView.displayLocs(results);
+            // });
         },
 
         displayLocs: function(locs) {
