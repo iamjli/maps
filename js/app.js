@@ -3,7 +3,7 @@ $(function() {
 
     var NUM_LOCS = 5;
     var initLatLng = {lat: 42.3601, lng: -71.0589};
-    var locations = [
+    var LOCATIONS = [
         {
             "name": "Logan",
             "latlng": {lat: 42.3656132, lng: -71.0117489}
@@ -17,25 +17,62 @@ $(function() {
             "latlng": {lat: 42.3770029, lng: -71.1188488}
         }
     ];
-
-    var map;
+    var filtered_locs = ko.observableArray();
 
     var models = {
 
         init: function() {
+
+        },
+
+        filter: function(phrase) {
+            out = [];
+            for (var i=0, L=LOCATIONS.length; i<L; i++) {
+                if (LOCATIONS[i].name == phrase) {
+                    out.push(LOCATIONS[i]);
+                }
+            }
+            return out;
+        }
+
+    };
+
+
+    var view = {
+        init: function() {
             // create map
-            map = new google.maps.Map(document.getElementById('map'), {
+            this.map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 12,
                 center: initLatLng
             });
-
             this.list = $('#locs');
 
-            // list locations to page and display markers
-            locations.forEach(function(loc) {
-                models.addLocs(loc);
-                models.addMarker(loc);
-            })
+            // // populate ko filtered markers
+            // LOCATIONS.forEach(function(loc) {
+            //     filtered_locs.push(loc);
+            // })
+
+            view.displayLocs(LOCATIONS);
+
+            // on click, trigger filter
+            $('#button').click(function() {
+                var search = $('#search').val();
+                var results = models.filter(search);
+
+                view.displayLocs(results);
+            });
+        },
+
+        displayLocs: function(locs) {
+            this.list.empty();
+            if (locs.length>0) {
+                locs.forEach(function(loc) {
+                    view.addLocs(loc);
+                    view.addMarker(loc);
+                })
+            } else {
+                this.list.append('<li>'+'No results found'+'</li>')
+            }
         },
 
         // adds marker to map
@@ -49,27 +86,11 @@ $(function() {
 
         // adds location to list
         addLocs: function(loc) {
-            this.list.append('<li>'+loc.name+'</li>')
-        },
-
-        responsive: function() {
-            google.maps.event.addDomListener(window, 'load', models.init());
-            google.maps.event.addDomListener(window, "resize", function() {
-                var center = map.getCenter();
-                google.maps.event.trigger(map, "resize");
-                map.setCenter(center);
-            });
+            this.list.append('<li>'+loc.name+'</li>');
         }
-
     };
 
+    models.init();
+    view.init();
 
-    var view = {
-        init: function() {
-        }
-
-    };
-
-    // models.init();
-    models.responsive();
 });
