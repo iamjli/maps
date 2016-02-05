@@ -18,18 +18,13 @@
     <div class="container">
       <div class="row">
         <div class="col-md-2">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for..." id="search" data-bind="value: phrase, valueUpdate: 'afterkeydown', enterkey: render">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button" id="button" data-bind="click: render">Filter</button>
-            </span>
-          </div>
+          <input type="text" class="form-control" placeholder="Search for..." id="search" data-bind="value: phrase, valueUpdate: 'keyup'" autocomplete='off'>
           <br>
           <p><strong id="numresults" data-bind="text: numResults"></strong> results found</p>
           <div data-bind="foreach: locations, click: click">
             <ul id="locs" style="padding-left: 0px;">
               <div data-bind="if: marked">
-                <ol data-bind="text: name"></ol>
+                <ol data-bind="text: name, style: {color: color}"></ol>
               </div>
             </ul>
           </div>

@@ -25,7 +25,7 @@ var app = app || {};
                     title: loc.name
                 }));
                 loc.marked(true);
-                loc.wiki = "Information about";
+                loc.color = ko.observable('black');
             })
 
 

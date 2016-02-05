@@ -80,15 +80,21 @@ $(function () {
 			if (marker.getAnimation() !== null) {
 				marker.setAnimation(null);
 				app.infoWindow.close();
+				loc.color('black');
 			} else {
 				self.locations().forEach(function (m) {
 					m.marker().setAnimation(null);
+					m.color('black');
 				})
 				marker.setAnimation(google.maps.Animation.BOUNCE);
+				loc.color('green');
 			}
 		}
 
 		self.render = function () {
+			self.locations().forEach(function(loc) {
+				loc.marker().setMap(null);
+			})
 			self.filter(self.phrase());
 		}
 
@@ -96,7 +102,7 @@ $(function () {
 		self.filter = function (phrase) {
 			var count = 0;
 			self.locations().forEach(function (loc) {
-				if (loc.name.toUpperCase().search(phrase.toUpperCase()) != -1) {
+				if ((!phrase) || loc.name.toUpperCase().search(phrase.toUpperCase()) != -1) {
 					loc.marker(new google.maps.Marker({
 						position: loc.latlng,
 						map: app.map,
@@ -105,13 +111,14 @@ $(function () {
 					loc.marked(true);
 					count ++;
 				} else {
-					loc.marker().setMap(null);
 					loc.marked(false);
 				}
 			})
 			self.init();
 			self.numResults(count);
 		}
+
+		self.phrase.subscribe(self.render);
 	}
 
 	ko.applyBindings(new AppViewModel());
