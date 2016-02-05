@@ -21,6 +21,7 @@ var app = app || {};
                 loc.marker = ko.observable(new google.maps.Marker({
                     position: loc.latlng,
                     map: app.map,
+                    animation: google.maps.Animation.DROP,
                     title: loc.name
                 }));
                 loc.marked(true);

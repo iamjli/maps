@@ -22,8 +22,9 @@ $(function () {
 			self.locations().forEach(function (loc) {
 				// populate wikipedia articles
 				loc.wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + loc.name +
-				'&format=json&callback=wikiCallback';
+					'&format=json&callback=wikiCallback';
 
+				// request Wikipedia descriptions
 				$.ajax({
 					url: loc.wikiURL,
 					dataType: "jsonp",
@@ -31,14 +32,14 @@ $(function () {
 						if (res[2]) {
 							loc.article = res[2][0];
 							loc.content = '<div id="iw-container">' +
-							'<div class="iw-title">' +
-							loc.name +
-							'</div>' +
-							'<div class="iw-content">' +
-							loc.article +
-							'</div>' +
-							'<div class="iw-bottom-gradient"></div>' +
-							'</div>';
+								'<div class="iw-title">' +
+								loc.name +
+								'</div>' +
+								'<div class="iw-content">' +
+								  loc.article +
+								'</div>' +
+								'<div class="iw-bottom-gradient"></div>' +
+							  '</div>';
 						} else {
 							alert("Cannot load Wikipedia data.")
 						}
@@ -51,24 +52,40 @@ $(function () {
 				loc.marker().addListener('click', function () {
 					app.infoWindow.setContent(loc.content);
 					app.infoWindow.open(app.map, loc.marker());
+					self.toggleBounce(loc);
 				})
 			})
-};
-self.init();
+		};
+		self.init();
 
-self.click = function (data, event) {
+		// set click event
+		self.click = function (data, event) {
 			// get click item
 			var elem = event.target.outerHTML;
-			var title = elem.split('>')[1].split('<')[0]
-			console.log(title);
+			var title = elem.split('>')[1].split('<')[0];
 
 			// get location
 			self.locations().forEach(function (loc) {
 				if (loc.name == title) {
 					app.infoWindow.setContent(loc.content);
 					app.infoWindow.open(app.map, loc.marker());
+					self.toggleBounce(loc);
 				}
 			})
+		}
+
+		// animate markers
+		self.toggleBounce = function (loc) {
+			var marker = loc.marker();
+			if (marker.getAnimation() !== null) {
+				marker.setAnimation(null);
+				app.infoWindow.close();
+			} else {
+				self.locations().forEach(function (m) {
+					m.marker().setAnimation(null);
+				})
+				marker.setAnimation(google.maps.Animation.BOUNCE);
+			}
 		}
 
 		self.render = function () {
@@ -96,7 +113,6 @@ self.click = function (data, event) {
 			self.numResults(count);
 		}
 	}
-
 
 	ko.applyBindings(new AppViewModel());
 });
