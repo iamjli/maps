@@ -11,24 +11,28 @@
     <script type='text/javascript' src="js/packages/knockout-3.4.0.js"></script>
     <script type="text/javascript" src="js/packages/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/infoStyle.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <div class="container">
       <div class="row">
         <div class="col-md-2">
-          <locs data-bind="forEach: locations">
-            <ul id="locs">
-              <ol data-bind="text: name"></ol>
-            </ul>
-          </locs>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for..." id="search">
+            <input type="text" class="form-control" placeholder="Search for..." id="search" data-bind="value: phrase, valueUpdate: 'afterkeydown', enterkey: render">
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button" id="button" data-bind="click: filter">Filter</button>
+              <button class="btn btn-default" type="button" id="button" data-bind="click: render">Filter</button>
             </span>
           </div>
-          <ul id="locs"></ul>
+          <br>
+          <p><strong id="numresults" data-bind="text: numResults"></strong> results found</p>
+          <locs data-bind="foreach: locations, click: click">
+            <ul id="locs" style="padding-left: 0px;">
+              <div data-bind="if: marked">
+                <ol data-bind="text: name"></ol>
+              </div>
+            </ul>
+          </locs>
         </div>
         <div class="col-md-10" id="map-container">
           <div id="map"></div>
@@ -38,8 +42,8 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGH5QTI2ZOtyAC2Oxufn3lXoid_xwzgDg">
     </script>
-    <script src="js/models/locations.js"></script>
     <script src="js/views/app-view.js"></script>
+    <script src="js/models/locations.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
