@@ -1,7 +1,7 @@
 
 var app = app || {};
 
-$(function () {
+var launch = function () {
 	'use strict';
 
 	// kick things off by creating the `App`
@@ -94,6 +94,9 @@ $(function () {
 		self.render = function () {
 			self.locations().forEach(function(loc) {
 				loc.marker().setMap(null);
+				if (loc.marker().getMap()) {
+					console.log(loc.name + loc.marker().getMap().toString())
+				}
 			})
 			self.filter(self.phrase());
 		}
@@ -122,20 +125,9 @@ $(function () {
 	}
 
 	ko.applyBindings(new AppViewModel());
-});
-
-// handle enter key
-ko.bindingHandlers.enterkey = {
-	init: function (element, valueAccessor, allBindings, viewModel) {
-		var callback = valueAccessor();
-		$(element).keypress(function (event) {
-			var keyCode = (event.which ? event.which : event.keyCode);
-			if (keyCode === 13) {
-				callback.call(viewModel);
-				return false;
-			}
-			return true;
-		});
-	}
 };
+
+function errorHandling() {
+	alert("Error while loading Google Maps");
+}
 

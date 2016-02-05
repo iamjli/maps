@@ -18,16 +18,18 @@
     <div class="container">
       <div class="row">
         <div class="col-md-2">
-          <input type="text" class="form-control" placeholder="Search for..." id="search" data-bind="value: phrase, valueUpdate: 'keyup'" autocomplete='off'>
-          <br>
-          <p><strong id="numresults" data-bind="text: numResults"></strong> results found</p>
-          <div data-bind="foreach: locations, click: click">
-            <ul id="locs" style="padding-left: 0px;">
-              <div data-bind="if: marked">
-                <ol data-bind="text: name, style: {color: color}"></ol>
-              </div>
-            </ul>
-          </div>
+          <nav id="drawer">
+            <input type="text" class="form-control" placeholder="Search for..." id="search" data-bind="value: phrase, valueUpdate: 'keyup'" autocomplete='off'>
+            <br>
+            <p><strong id="numresults" data-bind="text: numResults"></strong> results found</p>
+            <div data-bind="foreach: locations, click: click">
+              <ul id="locs" style="padding-left: 0px;">
+                <div data-bind="if: marked">
+                  <ol data-bind="text: name, style: {color: color}"></ol>
+                </div>
+              </ul>
+            </div>
+          </nav>
         </div>
         <div class="col-md-10" id="map-container">
           <div id="map"></div>
@@ -35,7 +37,7 @@
       </div>
     </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGH5QTI2ZOtyAC2Oxufn3lXoid_xwzgDg">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGH5QTI2ZOtyAC2Oxufn3lXoid_xwzgDg&callback=launch" onerror="errorHandling()">
     </script>
     <script async src="js/views/app-view.js"></script>
     <script async src="js/models/locations.js"></script>
