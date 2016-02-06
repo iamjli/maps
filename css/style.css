@@ -1,9 +1,9 @@
 html, body {
   height: 100%;
+  width: 100%;
 }
 
-body {/*
-	font-family: 'Lato', sans-serif;*/
+body {
 	font-weight: 300;
     height: 100%;
     margin: 0;
@@ -18,11 +18,6 @@ hr {
     border-top: 3px solid #eee;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-}
-
 ol {
     cursor: pointer;
 }
@@ -30,43 +25,28 @@ ol {
 .container {
     width: 100%;
     margin: 0;
+    padding: 0;
 }
 
-.text-muted {
-	color: #BCBBBB;
+.locs {
+    position: absolute;
+    height: 100%;
+    margin-top: 50px;
+    margin-left: 0px;
+    padding-left: 1px;
+    background: black;
+    float: left;
+    z-index: 1;
 }
 
-.text-thin {
-	font-weight: 100;
-}
-
-.title-super {
-	font-size: 60px;
-}
-
-.title-logo {
-	margin-top: 20px;
-}
-
-.header-space {
-	margin-top: 15px;
-}
-
-.modal-image{
-	margin-right: 15px;
-	margin-bottom: 15px;
-	float: left;
-}
-
-.modal-body{
-	margin: 10px;
-	max-height: 420px;
-	overflow: auto;
+.searchBar {
+    height: 100%;
 }
 
 #map-container{
     height: 100vh;
-    max-width: 100%;
+    /*padding-left: 300px;*/
+    /*max-width: 100%;*/
 }
 
 #numresults{
@@ -82,14 +62,34 @@ ol {
 	border: 2px solid #ccc;
 }
 
-.locs {
-    position: absolute;
-    height: 100%;
-    margin-top: 50px;
-    margin-left: 0px;
-    padding-left: 1px;
-    background: black;
-    float: left;
-    z-index: 1;
+.full_map{
+
+    height:100%;
+    background-color:#FFCC00;
+    overflow:scroll;
+    overflow-style:auto;
+    position:relative;
+    overflow-x:hidden;
+    /*border:5px solid #fff;*/
+}
+
+.row {
+    overflow:auto;
+    height:100%;
+    width:100%;
+    margin: 0;
+}
+
+.searchBar{
+    width:300;
+    background-color: white;
+    height:100%;
+    float:left;
+    overflow:scroll;
+    overflow-style:auto;
+    z-index:10;
+    position:absolute;
+    top:0px;
+    overflow-x:hidden;
 }
 

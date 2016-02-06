@@ -10,3 +10,8 @@ Basic features:
 - Markers are updated along with the search results
 - The college names are clickable and trigger an animation and information window on the map
 - App features a full screen display of the map, while also sharing the screen with the list of colleges
+- Responsive design for mobile: search bar is drawable
+
+How to run:
+- Clone this repository or download as zip and unpack
+- Open index.html in a web browser

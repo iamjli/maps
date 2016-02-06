@@ -60,6 +60,11 @@ var launch = function () {
 
 		// set click event
 		self.click = function (data, event) {
+
+		    var drawer = document.querySelector('#drawer');
+		    var main = document.querySelector('#map');
+		    drawer.classList.remove('open');
+
 			// get click item
 			var elem = event.target.outerHTML;
 			var title = elem.split('>')[1].split('<')[0];
@@ -111,6 +116,7 @@ var launch = function () {
 						map: app.map,
 						title: loc.name
 					}));
+					loc.marker().setAnimation(null);
 					loc.marked(true);
 					count ++;
 				} else {
